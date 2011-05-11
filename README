@@ -1,0 +1,33 @@
+Dropbox Developer PC Setup
+====================================
+Setup a new developer PC with all the bangles and widgets you're used to.
+
+This script will obliterate big swaths of your OS (including /etc and ~/
+contents) and symlink them from your Dropbox folder. It only works in
+this direction because otherwise Dropbox will be clever about the symlinks
+and just store files on the service as real files. It is possible to run two
+relatively homogeneous machines concurrently off of these profiles.
+
+Dropbox layout:
+Dropbox/
+  Portable_Configuration/
+    etc/
+      ...etc dir and file replacements...
+    home/
+      ...home dir and file replacements...
+    machines/
+      HOSTNAME_1/
+        etc/
+          ...machine-specific etc files (hosts, e.g.)...
+        home/
+          ...machine-specific home files (hosts, e.g.)...
+    manual/
+      ssh_config
+    packages.txt
+    setup.sh
+    usr/
+      local/
+        bin/
+          ...local bin files...
+    www/
+      ...www folders...
