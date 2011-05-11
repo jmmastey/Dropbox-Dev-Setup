@@ -23,17 +23,17 @@ aptitude install $(cat packages.txt | tr '\n' ' ')
 
 # install clean home folder replacements
 function home_sub() { tgt=`echo $1 | sed -e "s#.*/##"`; link_file "$home/$tgt" "$2/$tgt" "$user"; }
-for sub in $(find "./home" -maxdepth 1 -mindepth 1); do home_sub "$sub" "$dbox/home"; done
-for sub in $(find "./machines/$host/home" -maxdepth 1 -mindepth 1); do home_sub "$sub" "$dbox/machines/$host/home"; done
+for sub in $(find "./home" -maxdepth 1 -mindepth 1 | grep -v example.ls); do home_sub "$sub" "$dbox/home"; done
+for sub in $(find "./machines/$host/home" -maxdepth 1 -mindepth 1 | grep -v example.ls); do home_sub "$sub" "$dbox/machines/$host/home"; done
 
 # /etc replacements 
 function etc_sub() { tgt=`echo $1 | sed -e "s#.*/##"`; link_file "/etc/$tgt" "$2/$tgt" "$user"; }
-for sub in $(find "./etc" -maxdepth 1 -mindepth 1); do etc_sub "$sub" "$dbox/etc"; done
-for sub in $(find "./machines/$host/etc" -maxdepth 1 -mindepth 1); do etc_sub "$sub" "$dbox/machines/$host/etc"; done
+for sub in $(find "./etc" -maxdepth 1 -mindepth 1 | grep -v example.ls); do etc_sub "$sub" "$dbox/etc"; done
+for sub in $(find "./machines/$host/etc" -maxdepth 1 -mindepth 1 | grep -v example.ls); do etc_sub "$sub" "$dbox/machines/$host/etc"; done
 
 # local bin replacements
 function local_sub() { tgt=`echo $1 | sed -e "s#.*/##"`; link_file "/usr/local/bin/$tgt" "$2/$tgt" "$user"; }
-for sub in $(find "./usr/local/bin" -maxdepth 1 -mindepth 1); do local_sub "$sub" "$dbox/usr/local/bin"; done
+for sub in $(find "./usr/local/bin" -maxdepth 1 -mindepth 1 | grep -v example.ls); do local_sub "$sub" "$dbox/usr/local/bin"; done
 
 # dirty replacements :(
 link_file "$home/.ssh/ssh_config" "$dbox/manual/ssh_config" "$user"
